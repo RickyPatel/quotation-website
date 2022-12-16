@@ -1,0 +1,19 @@
+{
+  "main.css": "/static/css/main.08462678.chunk.css",
+  "main.js": "/static/js/main.b8d24b4a.chunk.js",
+  "main.js.map": "/static/js/main.b8d24b4a.chunk.js.map",
+  "runtime~main.js": "/static/js/runtime~main.42ac5946.js",
+  "runtime~main.js.map": "/static/js/runtime~main.42ac5946.js.map",
+  "static/js/2.9cbccdad.chunk.js": "/static/js/2.9cbccdad.chunk.js",
+  "static/js/2.9cbccdad.chunk.js.map": "/static/js/2.9cbccdad.chunk.js.map",
+  "index.html": "/index.html",
+  "precache-manifest.838470643f5e0cc107670344f3ac247d.js": "/precache-manifest.838470643f5e0cc107670344f3ac247d.js",
+  "service-worker.js": "/service-worker.js",
+  "static/css/main.08462678.chunk.css.map": "/static/css/main.08462678.chunk.css.map",
+  "static/media/styles.css": "/static/media/bg3.ed390ebb.jpg",
+  "static/media/books.jpg": "/static/media/books.01abdd46.jpg",
+  "static/media/cart.png": "/static/media/cart.c17b9542.png",
+  "static/media/product.png": "/static/media/product.abae3096.png",
+  "static/media/tired.jpg": "/static/media/tired.3be04660.jpg",
+  "static/media/youwant.jpg": "/static/media/youwant.a9ea7397.jpg"
+}
