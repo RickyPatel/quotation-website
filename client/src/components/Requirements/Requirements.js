@@ -31,7 +31,7 @@ class Requirements extends Component {
     };
 
     axios.post("/api/newreq", formData).then((res) => {
-      window.location = "/requirements";
+      window.location = '/requirements';
       // window.location.reload(true);
     });
   };

@@ -83,82 +83,71 @@ const storage = new GridFsStorage({
 
 const upload = multer({ storage });
 
-// all your routes should go here
-// app.use("/", require(path.join(__dirname, 'api', 'routes', 'route.js'));
-
-// static files (build of your frontend)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "./client", "build")));
-  // app.get("/*", (req, res) => {
-  //   res.sendFile(path.join(__dirname, "./client", "build", "index.html"));
-  // });
-
-  // Route for image upload(s)
-  app.post("/uploaditem", upload.array("files"), (req, res) => {
-    const imageIsAvailable = req.files.length > 0;
-    const fileNames = [];
-    if (imageIsAvailable) {
-      const len = req.files.length;
-      for (let i = 0; i < len; i++) {
-        fileNames.push(req.files[i].filename);
-      }
+// Route for image upload(s)
+app.post("/uploaditem", upload.array("files"), (req, res) => {
+  const imageIsAvailable = req.files.length > 0;
+  const fileNames = [];
+  if (imageIsAvailable) {
+    const len = req.files.length;
+    for (let i = 0; i < len; i++) {
+      fileNames.push(req.files[i].filename);
     }
-    const product = new Product({
-      ...req.body,
-      imageIsAvailable,
-      fileNames,
-    });
-    product.save().then(() => {
-      res.send("ok");
-    });
+  }
+  const product = new Product({
+    ...req.body,
+    imageIsAvailable,
+    fileNames,
   });
-
-  // Route for getting image
-  app.get("/image/:filename", (req, res) => {
-    gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-      // Check if file exists
-      if (!file) {
-        return res.status(404).json({
-          err: "No file exists",
-        });
-      }
-
-      //Check if an image
-      if (
-        file.contentType === "image/jpeg" ||
-        file.contentType === "image/png" ||
-        file.contentType === "image/jpg" ||
-        file.contentType
-      ) {
-        const readStream = gfs.createReadStream(file.filename);
-        readStream.pipe(res);
-      } else {
-        res.status(404).json({
-          err: "Not an image",
-        });
-      }
-    });
+  product.save().then(() => {
+    res.send("ok");
   });
+});
 
-  // @route: for removing item from database
-  app.post("/removeitem", (req, res) => {
-    const item = req.body;
-    for (let i = 0; i < item.fileNames.length; i++) {
-      gfs.remove(
-        {
-          filename: item.fileNames[i],
-          root: "uploads", // Important to specify collection name (Not given in docs)
-        },
-        function (err, gridStore) {
-          if (err) throw err;
-        }
-      );
+// Route for getting image
+app.get("/image/:filename", (req, res) => {
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+    // Check if file exists
+    if (!file) {
+      return res.status(404).json({
+        err: "No file exists",
+      });
     }
-    Product.deleteOne({ _id: item._id }).then((result) => {
-      res.send("item deleted");
-    });
+
+    //Check if an image
+    if (
+      file.contentType === "image/jpeg" ||
+      file.contentType === "image/png" ||
+      file.contentType === "image/jpg" ||
+      file.contentType
+    ) {
+      const readStream = gfs.createReadStream(file.filename);
+      readStream.pipe(res);
+    } else {
+      res.status(404).json({
+        err: "Not an image",
+      });
+    }
   });
-}
+});
+
+// @route: for removing item from database
+app.post("/removeitem", (req, res) => {
+  const item = req.body;
+  for (let i = 0; i < item.fileNames.length; i++) {
+    gfs.remove(
+      {
+        filename: item.fileNames[i],
+        root: "uploads", // Important to specify collection name (Not given in docs)
+      },
+      function (err, gridStore) {
+        if (err) throw err;
+      }
+    );
+  }
+  Product.deleteOne({ _id: item._id }).then((result) => {
+    res.send("item deleted");
+  });
+});
 
 app.listen(process.env.PORT || 8000);
 console.log(`Listening to port ${port}`);
