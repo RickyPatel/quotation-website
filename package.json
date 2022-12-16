@@ -25,8 +25,7 @@
     "react-dom": "^16.8.3",
     "react-responsive-modal": "^3.6.0",
     "react-scripts": "2.1.5",
-    "react-tabs": "^3.0.0",
-    "serverless-http": "^3.1.0"
+    "react-tabs": "^3.0.0"
   },
   "scripts": {
     "start": "node app.js",
