@@ -158,7 +158,8 @@ class Product extends Component {
 
   render() {
     let item = this.props.item;
-    const api_uri = process.env.REACT_APP_API_URI_LOCAL;
+    // const api_uri = process.env.REACT_APP_API_URI_LOCAL;
+    const api_uri = process.env.REACT_APP_API_URI;
     if (!item.desc) {
       item.desc = "No description provided";
     }

@@ -161,7 +161,8 @@ class Item extends Component {
 	}
 
 	render() {
-		const api_uri = process.env.REACT_APP_API_URI_LOCAL;
+		// const api_uri = process.env.REACT_APP_API_URI_LOCAL;
+		const api_uri = process.env.REACT_APP_API_URI;
 		let item = this.props.item;
 
 		// generating carousel elements (array of JSX elements when rendered will come one after another)
