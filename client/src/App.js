@@ -12,7 +12,8 @@ import Buy from "./components/Buy/Buy";
 import Home from "./components/Home/Home";
 
 // Setting up baseURL for axios api requests change this to process.env.REACT_APP_API_URI_LOCAL for local testing and process.env.REACT_APP_API_URI for cloud testing
-axios.defaults.baseURL = process.env.REACT_APP_API_URI_LOCAL;
+// axios.defaults.baseURL = process.env.REACT_APP_API_URI_LOCAL;
+axios.defaults.baseURL = process.env.REACT_APP_API_URI;
 
 class App extends Component {
   render() {
